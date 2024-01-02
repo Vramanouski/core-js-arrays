@@ -11,68 +11,24 @@ function sumArrays(arr1, arr2) {
   });
 }
 
-/**
- * Returns an index of the specified element in array or -1 if element is not found.
- *
- * @param {array} arr - The input array.
- * @param {any} value - Element to search.
- * @return {number} - An index of the specified element.
- *
- * @example
- *    findElement(['Ace', 10, true], 10) => 1
- *    findElement(['Array', 'Number', 'string'], 'Date') => -1
- *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
- */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
-/**
- * Returns a number of all occurrences of the specified item in an array.
- *
- * @param {array} arr - The input array.
- * @param {any} item - Element to search.
- * @return {number} - Number of found items.
- *
- * @example
- *    findAllOccurrences([ 0, 0, 1, 1, 1, 2 ], 1) => 3
- *    findAllOccurrences([ 1, 2, 3, 4, 5 ], 0) => 0
- *    findAllOccurrences([ 'a','b','c','c' ], 'c') => 2
- *    findAllOccurrences([ null, undefined, null ], null) => 2
- *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
- */
-function findAllOccurrences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurrences(arr, item) {
+  return arr.reduce((count, current) => {
+    return current === item ? count + 1 : count;
+  }, 0);
 }
 
-/**
- * Removes falsy values from the specified array.
- * Falsy values: false, null, 0, "", undefined, and NaN.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array without falsy values.
- *
- * @example
- *    removeFalsyValues([ 0, false, 'cat', NaN, true, '' ]) => [ 'cat', true ]
- *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
- *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
- */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  const result = arr.filter((ar) => ar);
+  return result;
 }
 
-/**
- * Returns an array containing the lengths of each string in a specified array of strings.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array of string lengths.
- *
- * @example
- *    getStringsLength([ '', 'a', 'bc', 'def', 'ghij' ]) => [ 0, 1, 2, 3, 4 ]
- *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
- */
-function getStringsLength(/* arr */) {
-  throw new Error('Not implemented');
+function getStringsLength(arr) {
+  const result = arr.map((el) => el.length);
+  return result;
 }
 
 /**

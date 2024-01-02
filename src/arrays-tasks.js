@@ -69,84 +69,30 @@ function doubleArray(arr) {
   return arr.concat(arr);
 }
 
-/**
- * Concatenates all elements from specified array into single string with ',' delimiter.
- *
- * @param {array} arr - The input array.
- * @return {string} - The concatenated string.
- *
- * @example
- *    toStringList([0, false, 'cat', NaN, true, '']) => '0,false,cat,NaN,true,'
- *    toStringList([1, 2, 3, 4, 5]) => '1,2,3,4,5'
- *    toStringList(['rock', 'paper', 'scissors']) => 'rock,paper,scissors'
- */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  return arr.join(',');
 }
 
-/**
- * Returns array containing only unique values from the specified array.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array with unique values.
- *
- * @example
- *   distinct([ 1, 2, 3, 3, 2, 1 ]) => [ 1, 2, 3 ]
- *   distinct([ 'a', 'a', 'a', 'a' ])  => [ 'a' ]
- *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
- *   distinct([]) => []
- */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return [...new Set(arr)];
 }
 
-/**
- * Creates an n-dimensional array and fills it with zeros.
- *
- * @param {number} n - Depth of outter array (n > 0).
- * @param {number} size - Length of all arrays (size > 0).
- * @return {array} - The n-dimensional array filled with zeros.
- *
- * @example
- *    createNDimensionalArray(2, 3) => [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
- *    createNDimensionalArray(3, 2) => [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]
- *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
- *    createNDimensionalArray(1, 1) => [0]
- */
-function createNDimensionalArray(/* n, size */) {
-  throw new Error('Not implemented');
+function createNDimensionalArray(n, size) {
+  if (n === 1) {
+    return new Array(size).fill(0);
+  }
+
+  return new Array(size)
+    .fill(0)
+    .map(() => createNDimensionalArray(n - 1, size));
 }
 
-/**
- * Flattens a nested array into a single-level array.
- *
- * @param {array} nestedArray - The nested array to be flattened.
- * @return {array} - A single-level array.
- *
- * @example
- *    flattenArray([1, [2, [3, 4], 5], 6]) => [1, 2, 3, 4, 5, 6]
- *    flattenArray(['a', ['b', ['c', 'd'], 'e'], 'f']) => ['a', 'b', 'c', 'd', 'e', 'f']
- *    flattenArray([1, 2, 3, 4]) => [1, 2, 3, 4]
- */
-function flattenArray(/* nestedArray */) {
-  throw new Error('Not implemented');
+function flattenArray(nestedArray) {
+  return nestedArray.flat(Infinity);
 }
 
-/**
- * Projects each element of the specified array to a sequence
- * and flattens the resulting sequences into one array.
- *
- * @param {array} arr - The input array
- * @param {Function} childrenSelector - A transform function to apply to each element
- *                                     that returns an array of children
- * @return {array} - The flatted array
- *
- * @example
- *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
- *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
- */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.flatMap(childrenSelector);
 }
 
 /**

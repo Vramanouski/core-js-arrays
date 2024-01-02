@@ -1,44 +1,14 @@
-/* ********************************************************************************************
- *                                                                                            *
- * Please read the following tutorial before implementing tasks:                               *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array     *
- *                                                                                            *
- * NOTE : Please do not use loops! All tasks can be implemented using standard Array methods  *
- *                                                                                            *
- ******************************************************************************************** */
-
-/**
- * Creates an array of integers from the specified start to end (inclusive).
- *
- * @param {number} start - The first number of an array.
- * @param {number} end - The last number of an array.
- * @return {array} - An array of integers.
- *
- * @example
- *    getIntervalArray(1, 5)  => [ 1, 2, 3, 4, 5 ]
- *    getIntervalArray(-2, 2)  => [ -2, -1, 0, 1, 2 ]
- *    getIntervalArray(0, 100) => [ 0, 1, 2, ..., 100 ]
- *    getIntervalArray(3, 3) => [ 3 ]
- */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
+function sumArrays(arr1, arr2) {
+  const longer = arr1.length > arr2.length ? arr1 : arr2;
+  const shorter = arr1.length <= arr2.length ? arr1 : arr2;
 
-/**
- * Returns a new array where each element is the sum of the corresponding elements
- * from two arrays. Arrays can have different lengths.
- *
- * @param {array} arr1 - The first array.
- * @param {array} arr2 - The second array.
- * @return {array} - An array containing the sum of corresponding elements.
- *
- * @example
- *    sumArrays([1, 2, 3], [4, 5, 6]) => [5, 7, 9]
- *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
- *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
- */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+  return longer.map((elem, i) => {
+    const otherElem = i < shorter.length ? shorter[i] : 0;
+    return elem + otherElem;
+  });
 }
 
 /**

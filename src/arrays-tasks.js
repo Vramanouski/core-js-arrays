@@ -95,260 +95,152 @@ function selectMany(arr, childrenSelector) {
   return arr.flatMap(childrenSelector);
 }
 
-/**
- * Every month, you record your income and expenses.
- * Expenses may be greater than income.
- * You need to calculate the final balance.
- *
- * @param {array} arr - The input array [[income, expence], ...]
- * @return {number} - The final balance.
- *
- * @example
- *   calculateBalance([ [ 10, 8 ], [ 5, 1 ] ]) => (10 - 8) + (5 - 1) = 2 + 4 = 6
- *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
- *   calculateBalance([]) => 0
- */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  return arr.reduce(
+    (balance, [income, expense]) => balance + (income - expense),
+    0
+  );
 }
 
-/**
- * Breaks an array into chunks of the specified size.
- *
- * @param {array} arr - The array to be broken into chunks.
- * @param {number} chunkSize - The size of each chunk.
- * @return {array} - An array of chunks.
- *
- * @example
- *    createChunks([1, 2, 3, 4, 5, 6, 7], 3) => [[1, 2, 3], [4, 5, 6], [7]]
- *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
- *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
- */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  if (!Array.isArray(arr) || chunkSize <= 0) {
+    return [];
+  }
+
+  const numChunks = Math.ceil(arr.length / chunkSize);
+  return Array.from({ length: numChunks }, (_, i) =>
+    arr.slice(i * chunkSize, i * chunkSize + chunkSize)
+  );
 }
 
-/**
- * Generates an array of odd numbers of the specified length.
- *
- * @param {number} len - The length of an array.
- * @return {array} - An array of odd numbers.
- *
- * @example
- *    generateOdds(0) => []
- *    generateOdds(1) => [ 1 ]
- *    generateOdds(2) => [ 1, 3 ]
- *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
- */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  return Array.from({ length: len }, (_, i) => 2 * i + 1);
 }
 
-/**
- * Returns an element from the multidimensional array by the specified indices.
- *
- * @param {array} arr - The input multidimensional array
- * @param {array} indices - The array of indices
- * @return {any} - An element from the array
- *
- * @example
- *   getElementByIndices([[1, 2], [3, 4], [5, 6]], [0,0]) => 1        (arr[0][0])
- *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
- *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
- */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  return indices.reduce((subArray, index) => {
+    if (subArray !== undefined && subArray[index] !== undefined) {
+      return subArray[index];
+    }
+    return undefined;
+  }, arr);
 }
 
-/**
- * Returns the number of all falsy values in the specified array.
- *
- * @param {array} arr - The input array.
- * @return {number} - The number of all falsy values.
- *
- * @example
- *  getFalsyValuesCount([]) => 0
- *  getFalsyValuesCount([ 1, '', 3 ]) => 1
- *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
- *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
- */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.reduce((acc, current) => {
+    return !current ? acc + 1 : acc;
+  }, 0);
 }
 
-/**
- * Creates an identity matrix of the specified size.
- *
- * @param {number} n - A size of the matrix.
- * @return {array} - An identity matrix.
- *
- * @example
- *     getIdentityMatrix(1)  => [[1]]
- *
- *     getIdentityMatrix(2) => [[1,0],
- *                             [0,1]]
- *
- *                              [[1,0,0,0,0],
- *                              [0,1,0,0,0],
- *     getIdentityMatrix(5) =>  [0,0,1,0,0],
- *                              [0,0,0,1,0],
- *                              [0,0,0,0,1]]
- */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (_, i) =>
+    Array.from({ length: n }, (__, j) => (i === j ? 1 : 0))
+  );
 }
 
-/**
- * Returns an array containing indices of odd elements in the input array.
- *
- * @param {array} numbers - The array of numbers.
- * @return {array} - An array containing indices of odd elements.
- *
- * @example
- *    getIndicesOfOddNumbers([1, 2, 3, 4, 5]) => [0, 2, 4]
- *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
- *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
- */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  return numbers.reduce((acc, current, i) => {
+    if (current % 2 !== 0) {
+      acc.push(i);
+    }
+    return acc;
+  }, []);
 }
 
-/**
- * Returns the array of RGB Hex strings from the specified array of numbers.
- *
- * @param {array} arr - The input array.
- * @return {array} - The array of RGB Hex strings.
- *
- * @example
- *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
- *    getHexRGBValues([]) => []
- */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map((num) => {
+    const numTesting = Math.abs(num) % 16777216;
+
+    const hex = numTesting.toString(16).padStart(6, '0').toUpperCase();
+
+    return `#${hex}`;
+  });
 }
 
-/**
- * Returns the n largest values from the specified array
- *
- * @param {array} arr - The input array
- * @param {number} n - Number of maximum values.
- * @return {array} - n largest values.
- *
- * @example
- *   getMaxItems([], 5) => []
- *   getMaxItems([ 1, 2 ], 1) => [ 2]
- *   getMaxItems([ 2, 3, 1 ], 2) => [ 3, 2]
- *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
- *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
- */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  return arr.sort((a, b) => b - a).slice(0, n);
 }
 
-/**
- * Finds and returns an array containing only the common elements found in two arrays.
- *
- * @param {array} arr1 - The first array.
- * @param {array} arr2 - The second array.
- * @return {array} - An array containing common elements.
- *
- * @example
- *    findCommonElements([1, 2, 3], [2, 3, 4]) => [ 2, 3 ]
- *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
- *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
- */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  return arr1.filter((element) => arr2.includes(element));
 }
 
-/**
- * Finds the length of the longest increasing subsequence of a given array of integers.
- *
- * @param {array} nums - The array of integers.
- * @return {number} - The length of the longest increasing subsequence.
- *
- * @example
- *    findLongestIncreasingSubsequence([10, 22, 9, 33, 21, 50, 41, 60, 80]) => 3
- *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
- *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
- */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.flatMap((item, index) =>
+    Array.from({ length: index + 1 }, () => item)
+  );
 }
 
-/**
- * Propagates every item in sequence its position times
- * Returns an array that consists of: one first item, two second items, three third items etc.
- *
- * @param {array} arr - The input array
- * @return {array}
- *
- * @example :
- *  propagateItemsByPositionIndex([]) => []
- *  propagateItemsByPositionIndex([ 1 ]) => [ 1 ]
- *  propagateItemsByPositionIndex([ 'a', 'b' ]) => [ 'a', 'b','b' ]
- *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
- *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
- */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const digits = {
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+    zero: 0,
+  };
+
+  return arr
+    .map((name) => ({ name, value: digits[name] }))
+    .sort((a, b) => a.value - b.value)
+    .map((object) => object.name);
 }
 
-/**
- * Shifts an array by n positions. If n is negative, the array is shifted to the left;
- * if positive, it is shifted to the right.
- *
- * @param {array} arr - The array to be shifted.
- * @param {number} n - The number of positions to shift the array elements.
- * @return {array} - The shifted array.
- *
- * @example
- *    shiftArray([1, 2, 3, 4, 5], 2) => [4, 5, 1, 2, 3]
- *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
- *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
- */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const mid = Math.floor(arr.length / 2);
+  const hasMiddle = arr.length % 2 !== 0;
+
+  const head = arr.slice(0, mid);
+  const tail = arr.slice(hasMiddle ? mid + 1 : mid);
+  const middle = hasMiddle ? [arr[mid]] : [];
+
+  return tail.concat(middle).concat(head);
 }
 
-/**
- * Sorts digit names.
- *
- * @param {array} arr - The input array.
- * @return {array} - Sorted array.
- *
- * @example
- *   sortDigitNamesByNumericOrder([]) => []
- *   sortDigitNamesByNumericOrder([ 'nine','one' ]) => [ 'one', 'nine' ]
- *   sortDigitNamesByNumericOrder([ 'one','two','three' ]) => [ 'one','two', 'three' ]
- *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
- *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
- */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(
+  nums,
+  previous = -Infinity,
+  currentIndex = 0
+) {
+  if (currentIndex === nums.length) {
+    return 0;
+  }
+
+  const withCurrent =
+    nums[currentIndex] > previous
+      ? 1 +
+        findLongestIncreasingSubsequence(
+          nums,
+          nums[currentIndex],
+          currentIndex + 1
+        )
+      : 0;
+  const withoutCurrent = findLongestIncreasingSubsequence(
+    nums,
+    previous,
+    currentIndex + 1
+  );
+
+  return Math.max(withCurrent, withoutCurrent);
 }
 
-/**
- * Swaps the head and tail of the specified array:
- * the head (first half) of array move to the end, the tail (last half) move to the start.
- * The middle element (if exists) leave on the same position. *
- *
- * @param {array} arr - The input array.
- * @return {array} - The swapped array.
- *
- * @example
- *   [ 1, 2, 3, 4, 5 ]   =>  [ 4, 5, 3, 1, 2 ]
- *    \----/   \----/
- *     head     tail
- *
- *   swapHeadAndTail([ 1, 2 ]) => [ 2, 1 ]
- *   swapHeadAndTail([ 1, 2, 3, 4, 5, 6, 7, 8 ]) =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
- *   swapHeadAndTail([ 1 ]) => [ 1 ]
- *   swapHeadAndTail([]) => []
- *
- */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  if (arr.length === 0 || n === 0) {
+    return arr;
+  }
+
+  const [{ length }] = arr;
+  const shift = ((n % length) + length) % length;
+
+  return arr.map((_, index) => {
+    const originalIndex = (index - shift + length) % length;
+    return arr[originalIndex];
+  });
 }
 
 module.exports = {

@@ -204,43 +204,42 @@ function swapHeadAndTail(arr) {
 
 function findLongestIncreasingSubsequence(
   nums,
-  previous = -Infinity,
-  currentIndex = 0
+  index = 0,
+  prev = -Infinity,
+  currentLength = 0,
+  mL = 1
 ) {
-  if (currentIndex === nums.length) {
-    return 0;
+  let maxLength = mL;
+  if (index >= nums.length) return maxLength;
+
+  let newLength = currentLength;
+  if (nums[index] > prev) {
+    newLength += 1;
+    maxLength = Math.max(maxLength, newLength);
+  } else {
+    newLength = 1;
   }
 
-  const withCurrent =
-    nums[currentIndex] > previous
-      ? 1 +
-        findLongestIncreasingSubsequence(
-          nums,
-          nums[currentIndex],
-          currentIndex + 1
-        )
-      : 0;
-  const withoutCurrent = findLongestIncreasingSubsequence(
+  return findLongestIncreasingSubsequence(
     nums,
-    previous,
-    currentIndex + 1
+    index + 1,
+    nums[index],
+    newLength,
+    maxLength
   );
-
-  return Math.max(withCurrent, withoutCurrent);
 }
 
 function shiftArray(arr, n) {
-  if (arr.length === 0 || n === 0) {
-    return arr;
+  let answer = [];
+
+  if (n > 0) {
+    answer = [...arr.slice(-n), ...arr.slice(0, -n)];
   }
 
-  const [{ length }] = arr;
-  const shift = ((n % length) + length) % length;
-
-  return arr.map((_, index) => {
-    const originalIndex = (index - shift + length) % length;
-    return arr[originalIndex];
-  });
+  if (n < 0) {
+    answer = [...arr.slice(Math.abs(n)), ...arr.slice(0, Math.abs(n))];
+  }
+  return answer;
 }
 
 module.exports = {
